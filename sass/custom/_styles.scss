@@ -68,7 +68,8 @@ html {
       font-size:20px;
   }
 
-  .gist-highlight {
+  .highlight {
+      @extend .gist-highlight;
       margin-bottom:0;
   }
 
