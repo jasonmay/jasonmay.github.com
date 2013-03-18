@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Jason May]]></title>
-  <link href="http://jasonmay.github.com/atom.xml" rel="self"/>
-  <link href="http://jasonmay.github.com/"/>
-  <updated>2013-03-17T22:10:00-04:00</updated>
-  <id>http://jasonmay.github.com/</id>
+  <link href="http://jarsonmar.org/atom.xml" rel="self"/>
+  <link href="http://jarsonmar.org/"/>
+  <updated>2013-03-17T22:26:53-04:00</updated>
+  <id>http://jarsonmar.org/</id>
   <author>
     <name><![CDATA[Jason May]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Projects in Progress]]></title>
-    <link href="http://jasonmay.github.com/blog/2013/03/17/projects-in-progress/"/>
+    <link href="http://jarsonmar.org/blog/2013/03/17/projects-in-progress/"/>
     <updated>2013-03-17T19:47:00-04:00</updated>
-    <id>http://jasonmay.github.com/blog/2013/03/17/projects-in-progress</id>
+    <id>http://jarsonmar.org/blog/2013/03/17/projects-in-progress</id>
     <content type="html"><![CDATA[<p>I have been learning plenty of new stuff lately, so I thought I&#8217;d write about the things in the works, the concepts grasped, and the ideas acquired in the process.</p>
 
 <h2>Moe</h2>

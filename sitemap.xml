@@ -1,23 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://jasonmay.github.com/blog/2013/03/17/projects-in-progress/</loc>
+        <loc>http://jarsonmar.org/blog/2013/03/17/projects-in-progress/</loc>
         <lastmod>2013-03-17T22:08:57-04:00</lastmod>
     </url>
     <url>
-        <loc>http://jasonmay.github.com/archives/</loc>
+        <loc>http://jarsonmar.org/archives/</loc>
         <lastmod>2013-03-17T22:08:57-04:00</lastmod>
     </url>
     <url>
-        <loc>http://jasonmay.github.com/blog/archives/</loc>
+        <loc>http://jarsonmar.org/blog/archives/</loc>
         <lastmod>2013-03-17T22:08:57-04:00</lastmod>
     </url>
     <url>
-        <loc>http://jasonmay.github.com/</loc>
+        <loc>http://jarsonmar.org/</loc>
         <lastmod>2013-03-17T22:08:57-04:00</lastmod>
     </url>
     <url>
-        <loc>http://jasonmay.github.com/robots.txt</loc>
+        <loc>http://jarsonmar.org/robots.txt</loc>
         <lastmod>2013-03-17T22:08:57-04:00</lastmod>
     </url>
 </urlset>
