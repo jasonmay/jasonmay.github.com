@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Jason May]]></title>
+  <link href="http://jasonmay.github.com/atom.xml" rel="self"/>
+  <link href="http://jasonmay.github.com/"/>
+  <updated>2013-03-17T22:10:00-04:00</updated>
+  <id>http://jasonmay.github.com/</id>
+  <author>
+    <name><![CDATA[Jason May]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Projects in Progress]]></title>
+    <link href="http://jasonmay.github.com/blog/2013/03/17/projects-in-progress/"/>
+    <updated>2013-03-17T19:47:00-04:00</updated>
+    <id>http://jasonmay.github.com/blog/2013/03/17/projects-in-progress</id>
+    <content type="html"><![CDATA[<p>I have been learning plenty of new stuff lately, so I thought I&#8217;d write about the things in the works, the concepts grasped, and the ideas acquired in the process.</p>
+
+<h2>Moe</h2>
+
+<p>A few weeks ago I started contributing to
+<a href="http://github.com/MoeOrganization/moe">Moe</a>,  an ultra-modern Perl interpreter
+written in <a href="http://scala-lang.org">Scala</a>.</p>
+
+<p>This has been extremely fun, since it is <a href="http://ofun.pm">-Ofun</a>. I fleshed out
+the AST quite a bit and helped make the class-instance model more functional.</p>
+
+<p>I did <strong>not</strong> need to know the ins and outs of perl5&#8217;s interpreter. As far as I
+know, Moe is nothing like
+<a href="http://perldoc.perl.org/perlinterp.html">perl5&#8217;s interpreter</a>. Moe is built using
+<a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a>s from the ground up.
+It may not be the most efficient route to design a programming language, but it
+is the quickest route to a working implementation and is incredibly easy to
+grasp once you get your feet wet.</p>
+
+<p>By no means am I an expert in Scala either. The Scala School was more than
+enough to get me started. I took my time, and when I wanted to explore deeper,
+I jumped into <a href="http://www.scala-lang.org/node/104">The Tour of Scala</a> and
+revisited old code to fix things up.</p>
+
+<h2>Neptune</h2>
+
+<p>The past few weeks I accidentally deflated my &#8220;Moe&#8221;mentum with a new project:
+<a href="https://github.com/jasonmay/neptune">Neptune</a>.</p>
+
+<p>The point of this project isn&#8217;t to benefit other people, but to benefit my
+knowledge of Scala and other tools in general. I have no professional
+experience in distributed systems beyond deploying code to Linode and Heroku. I
+want to get my feet wet in having multiple services communicate in a way that
+scales, and at the same time is not massively over-engineered. This project
+also houses my first-ever
+<a href="https://github.com/jasonmay/neptune/blob/9404f5b/util/massage.py">python script</a>!</p>
+
+<p>At this point it publically faces to a TCP port that users connect to (via
+telnet or some-such), though it does not communicate with the internal universe
+at all. The universe is managed and scheduled using an <a href="http://akka.io">Akka</a>
+scheduler; and will a) receive commands, and b) send updates using Thrift. I
+haven&#8217;t yet decided on a persistent store for the universe data. For now, I am
+currently importing everything from a flat JSON script and loading everything
+into <a href="http://redis.io">Redis</a>. And honestly, I haven&#8217;t finally decided on
+Thrift either. I have heard just as many good things about Google&#8217;s
+<a href="https://code.google.com/p/protobuf/">protobuf</a>.</p>
+
+<p>In two different execution contexts (one for the &#8220;nature&#8221; scheduler, and one
+for redis IO work), I implement the dynamic of the universe through fluid,
+<a href="http://git.io/BD_i6Q">event-based timing</a>.
+When I glue the services together with Thrift, I will
+probably create a third execution context for its own blocking needs.</p>
+
+<p>I am caching the universe data like there is no tomorrow. Nearly everything you
+can think of is in a set. Mobiles (NPCs) are in a
+<a href="http://redis.io/commands#set">set</a> per location, and reciprocally, mobiles own
+a &#8220;location&#8221; property. My aim is to keep property lookup work to a minimum to
+mitigate unnecessary blocking. Besides, frequent updating is Redis&#8217; specialty!
+I also hope to abstract away all the extra update work as much as possible to
+avoid bugs.</p>
+
+<h2>Details pending</h2>
+
+<p>This is just a preface to all the different topics I hope to share in upcoming
+posts. Stay tuned!</p>
+]]></content>
+  </entry>
+  
+</feed>
