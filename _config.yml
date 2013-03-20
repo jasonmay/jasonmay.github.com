@@ -5,6 +5,7 @@
 url: http://jarsonmar.org
 title: Jason May
 subtitle:
+auto: false
 author: Jason May
 simple_search: http://google.com/search
 description:

@@ -1,0 +1,16 @@
+body {
+    padding-top: 40px;
+}
+
+#octopreview {
+  width: 100%;
+  height: 500px;
+  -moz-box-shadow: 3px 3px 4px #000;
+  -webkit-box-shadow: 3px 3px 4px #000;
+  box-shadow: 3px 3px 4px #000;
+  border: none;
+}
+
+#previewlabel { float: left; }
+#reloadbutton { float: right; }
+#previewframe { clear: both; }

@@ -1,0 +1,22 @@
+%html
+  %head
+    = bootstrap_assets
+    %link{:rel => :stylesheet, :href => "/static/layout.css"}
+  %body
+    - container :fixed do
+      %body
+        .navbar.navbar-fixed-top
+          .navbar-inner
+            .container
+              %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+              %a.brand(href="/") Drafts
+              .container.nav-collapse
+                -#
+                  %ul.nav
+                    %li= link_to "Drafts", "/drafts"
+      - row do
+        - span12 do
+          = yield

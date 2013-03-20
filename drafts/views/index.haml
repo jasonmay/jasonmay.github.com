@@ -1,0 +1,8 @@
+.page-header
+  %h1 List of drafts here
+
+%ul
+- @drafts.each do |draft|
+  %li
+    %a{:href => "/draft/" + draft.name}
+      = draft.data["title"]

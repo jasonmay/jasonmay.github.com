@@ -1,0 +1,46 @@
+.page-header
+  %h1= @draft.data["title"]
+
+#epiceditor
+
+.form-actions
+  %a{:href => "#", :onclick => "saveToDraftFile();", :class => "btn btn-primary"} Write
+  %a{:href => "/", :class => "btn"} Back to Draft Index
+
+%a{:name => "preview"}
+#previewlabel
+  %strong Preview:
+#reloadbutton
+  %button{:onclick => "reloadPreviewFrame()"} Reload Manually
+#previewframe
+  %iframe#octopreview{:src => "http://linode.jarsonmar.org/" + @draft.url}
+
+%script{:src => "/static/epiceditor/js/epiceditor.min.js"}
+:javascript
+  var editor = new EpicEditor({
+    container: 'epiceditor',
+    localStorageName: #{"drafts-#{@draft}".to_json},
+    basePath: '/static/epiceditor/',
+    file: {
+      defaultContent: #{@draft.content.to_json}
+    },
+    theme: {
+      base: #{'themes/base/epiceditor.css'.to_json},
+      preview: #{'themes/preview/github.css'.to_json},
+      editor: #{'themes/editor/epic-dark.css'.to_json},
+    }
+  });
+  editor.load();
+
+  function saveToDraftFile(preview) {
+    jQuery.post(
+      #{"/save/#{@draft.name}".to_json},
+      {content: editor.exportFile()},
+      function(d) { reloadPreviewFrame(); }
+    );
+  }
+
+  function reloadPreviewFrame() {
+    // Force-reload the iframe
+    document.getElementById('octopreview').src += '';
+  }
