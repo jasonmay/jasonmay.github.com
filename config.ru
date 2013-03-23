@@ -68,9 +68,25 @@ class SinatraEditorServer < Sinatra::Base
     jekyll_posts.find { |p| p.name == name }
   end
 
+  def preview_root(request)
+    opt = Jekyll.configuration({})
+
+    url = request.scheme + "://"
+    url << request.host
+
+    if request.scheme == "https" && request.port != 443 ||
+       request.scheme == "http" && request.port != 80
+      url << ":#{request.port}"
+    end
+
+    url << opt["root"]
+    url
+  end
+
   get('/post/:name') do
     @config = Jekyll.configuration({})
     @post = jekyll_post(params[:name])
+    @preview = preview_root(request)
     haml :post
   end
 

@@ -13,7 +13,7 @@
 #reloadbutton
   %button{:onclick => "reloadPreviewFrame()"} Reload Manually
 #previewframe
-  %iframe#octopreview{:src => "http://linode.jarsonmar.org/" + @post.url}
+  %iframe#octopreview{:src => "#{@preview}/#{@post.url}"}
 
 %script{:src => "#{@config["editor_root"]}/static/epiceditor/js/epiceditor.min.js"}
 :javascript
