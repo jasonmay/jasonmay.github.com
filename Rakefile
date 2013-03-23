@@ -3,7 +3,7 @@ require "bundler/setup"
 require "stringex"
 
 $:.unshift(File.join(__FILE__, '..', 'lib'))
-require "octopress"
+require "octopress/engine"
 
 ## -- Rsync Deploy config -- ##
 # Be sure your public key is listed in your server's ~/.ssh/authorized_keys file
@@ -30,7 +30,7 @@ new_post_ext    = "markdown"  # default new post file extension when using the n
 new_page_ext    = "markdown"  # default new page file extension when using the new_page task
 server_port     = "4000"      # port for preview server eg. localhost:4000
 
-octopress = Octopress.new(
+octopress = Octopress::Engine.new(
   ## -- Rsync Deploy config -- ##
   # Be sure your public key is listed in your server's ~/.ssh/authorized_keys file
   :ssh_user       => ssh_user,

@@ -8,6 +8,10 @@ require 'haml'
 require 'json'
 require 'yaml'
 require 'jekyll'
+
+$:.unshift(File.join(__FILE__, '..', 'lib'))
+require 'octopress/engine'
+
 # The project root directory
 $root = ::File.dirname(__FILE__)
 
