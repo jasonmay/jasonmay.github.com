@@ -2,6 +2,9 @@ require "rubygems"
 require "bundler/setup"
 require "stringex"
 
+$:.unshift(File.join(__FILE__, '..', 'lib'))
+require "octopress"
+
 ## -- Rsync Deploy config -- ##
 # Be sure your public key is listed in your server's ~/.ssh/authorized_keys file
 ssh_user       = "user@domain.com"
@@ -26,6 +29,28 @@ themes_dir      = ".themes"   # directory for blog files
 new_post_ext    = "markdown"  # default new post file extension when using the new_post task
 new_page_ext    = "markdown"  # default new page file extension when using the new_page task
 server_port     = "4000"      # port for preview server eg. localhost:4000
+
+octopress = Octopress.new(
+  ## -- Rsync Deploy config -- ##
+  # Be sure your public key is listed in your server's ~/.ssh/authorized_keys file
+  :ssh_user       => ssh_user,
+  :ssh_port       => ssh_port,
+  :document_root  => document_root,
+  :rsync_delete   => rsync_delete,
+  :rsync_args     => rsync_args,
+  :deploy_default => deploy_default,
+  :deploy_branch  => deploy_branch,
+  :public_dir      => public_dir,
+  :source_dir      => source_dir,
+  :blog_index_dir  => blog_index_dir,
+  :deploy_dir      => deploy_dir,
+  :stash_dir       => stash_dir,
+  :posts_dir       => posts_dir,
+  :themes_dir      => themes_dir,
+  :new_post_ext    => new_post_ext,
+  :new_page_ext    => new_page_ext,
+  :server_port     => server_port,
+)
 
 
 desc "Initial setup for Octopress: copies the default theme into the path of Jekyll's generator. Rake install defaults to rake install[classic] to install a different theme run rake install[some_theme_name]"
@@ -97,22 +122,7 @@ task :new_post, :title do |t, args|
   else
     title = get_stdin("Enter a title for your post: ")
   end
-  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
-  mkdir_p "#{source_dir}/#{posts_dir}"
-  filename = "#{source_dir}/#{posts_dir}/#{Time.now.strftime('%Y-%m-%d')}-#{title.to_url}.#{new_post_ext}"
-  if File.exist?(filename)
-    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
-  end
-  puts "Creating new post: #{filename}"
-  open(filename, 'w') do |post|
-    post.puts "---"
-    post.puts "layout: post"
-    post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
-    post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M')}"
-    post.puts "comments: true"
-    post.puts "categories: "
-    post.puts "---"
-  end
+  octopress.new_post(title)
 end
 
 # usage rake new_page[my-new-page] or rake new_page[my-new-page.html] or rake new_page (defaults to "new-page.markdown")
