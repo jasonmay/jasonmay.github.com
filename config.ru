@@ -30,12 +30,12 @@ class SinatraStaticServer < Sinatra::Base
 end
 
 class SinatraDraftsServer < Sinatra::Base
-  set :views => "drafts/views"
+  set :views => "editor/views"
 
   register Sinatra::Twitter::Bootstrap::Assets
 
   get(%r[^/static/(.+)]) do
-    path = "drafts/static/#{params[:captures].first}"
+    path = "editor/static/#{params[:captures].first}"
     if File.exists?(path)
       send_file(path)
     else
