@@ -29,7 +29,7 @@ class SinatraStaticServer < Sinatra::Base
 
 end
 
-class SinatraDraftsServer < Sinatra::Base
+class SinatraEditorServer < Sinatra::Base
   set :views => "editor/views"
 
   register Sinatra::Twitter::Bootstrap::Assets
@@ -59,26 +59,26 @@ class SinatraDraftsServer < Sinatra::Base
     site.posts
   end
 
-  def drafts_path(draft)
+  def posts_path(post)
     opt = Jekyll.configuration({})
-    File.join(opt["source"], '_posts', draft.name)
+    File.join(opt["source"], '_posts', post.name)
   end
 
   def jekyll_post(name)
     jekyll_posts.find { |p| p.name == name }
   end
 
-  get('/draft/:name') do
+  get('/post/:name') do
     @config = Jekyll.configuration({})
-    @draft = jekyll_post(params[:name])
-    haml :draft
+    @post = jekyll_post(params[:name])
+    haml :post
   end
 
   post('/save/:name') do
-    @draft = jekyll_post(params[:name])
-    @path = drafts_path(@draft)
+    @post = jekyll_post(params[:name])
+    @path = posts_path(@post)
     if params["content"]
-      out = @draft.data.to_yaml + "---\n" + params["content"]
+      out = @post.data.to_yaml + "---\n" + params["content"]
       f = File.open(@path, "w")
       f.write(out)
       f.close
@@ -91,10 +91,10 @@ class SinatraDraftsServer < Sinatra::Base
 
   get('/') do
     @config = Jekyll.configuration({})
-    @drafts = jekyll_posts
+    @posts = jekyll_posts
     haml :index
   end
 
 end
 
-run Rack::URLMap.new("/" => SinatraStaticServer.new, "/_editor" => SinatraDraftsServer.new)
+run Rack::URLMap.new("/" => SinatraStaticServer.new, "/_editor" => SinatraEditorServer.new)

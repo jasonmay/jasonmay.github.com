@@ -1,8 +1,8 @@
 .page-header
-  %h1 List of drafts here
+  %h1 Blog Posts
 
 %ul
-- @drafts.each do |draft|
+- @posts.each do |post|
   %li
-    %a{:href => @config["editor_root"] + "/draft/" + draft.name}
-      = draft.data["title"]
+    %a{:href => @config["editor_root"] + "/post/" + post.name}
+      = post.data["title"]

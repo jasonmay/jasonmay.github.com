@@ -1,11 +1,11 @@
 .page-header
-  %h1= @draft.data["title"]
+  %h1= @post.data["title"]
 
 #epiceditor
 
 .form-actions
-  %a{:href => "#", :onclick => "saveToDraftFile();", :class => "btn btn-primary"} Write
-  %a{:href => @config["editor_root"], :class => "btn"} Back to Draft Index
+  %a{:href => "#", :onclick => "saveToPostFile();", :class => "btn btn-primary"} Write
+  %a{:href => @config["editor_root"], :class => "btn"} Back to Post Index
 
 %a{:name => "preview"}
 #previewlabel
@@ -13,16 +13,16 @@
 #reloadbutton
   %button{:onclick => "reloadPreviewFrame()"} Reload Manually
 #previewframe
-  %iframe#octopreview{:src => "http://linode.jarsonmar.org/" + @draft.url}
+  %iframe#octopreview{:src => "http://linode.jarsonmar.org/" + @post.url}
 
 %script{:src => "#{@config["editor_root"]}/static/epiceditor/js/epiceditor.min.js"}
 :javascript
   var editor = new EpicEditor({
     container: 'epiceditor',
-    localStorageName: #{"drafts-#{@draft}".to_json},
+    localStorageName: #{"posts-#{@post}".to_json},
     basePath: #{@config["editor_root"].to_json} + '/static/epiceditor/',
     file: {
-      defaultContent: #{@draft.content.to_json}
+      defaultContent: #{@post.content.to_json}
     },
     theme: {
       base: #{'themes/base/epiceditor.css'.to_json},
@@ -32,9 +32,9 @@
   });
   editor.load();
 
-  function saveToDraftFile(preview) {
+  function saveToPostFile(preview) {
     jQuery.post(
-      #{"#{@config["editor_root"]}/save/#{@draft.name}".to_json},
+      #{"#{@config["editor_root"]}/save/#{@post.name}".to_json},
       {content: editor.exportFile()},
       function(d) { reloadPreviewFrame(); }
     );
