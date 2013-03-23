@@ -3,6 +3,8 @@ require 'sinatra/base'
 
 require 'sinatra/twitter-bootstrap'
 
+require 'stringex'
+
 require 'haml'
 
 require 'json'
@@ -92,6 +94,15 @@ class SinatraEditorServer < Sinatra::Base
     @post = jekyll_post(params[:name])
     @preview = preview_root(request)
     haml :post
+  end
+
+  post('/create') do
+    @config = Jekyll.configuration({})
+    @octopress = Octopress::Engine.new(:source_dir => @config["source"])
+    filename = @octopress.generate_filename(params["title"])
+    @octopress.new_post(params["title"], filename, false)
+    jekyll_site.process
+    redirect "#{@config["editor_root"]}/post/#{File.basename(filename)}"
   end
 
   post('/save/:name') do

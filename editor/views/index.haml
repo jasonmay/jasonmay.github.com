@@ -6,3 +6,9 @@
   %li
     %a{:href => @config["editor_root"] + "/post/" + post.name}
       = post.data["title"]
+
+%h2 Generate a New Post
+%form{:action => "#{@config["editor_root"]}/create", :method => "post"}
+  Title:
+  %input{:type => "text", :name => "title"}
+  %button{:type => "submit", :class => "btn btn-primary"} Create
