@@ -1,7 +1,7 @@
 %html
   %head
     = bootstrap_assets
-    %link{:rel => :stylesheet, :href => "/static/layout.css"}
+    %link{:rel => :stylesheet, :href => "#{@config["editor_root"]}/static/layout.css"}
   %body
     - container :fixed do
       %body
@@ -16,7 +16,7 @@
               .container.nav-collapse
                 -#
                   %ul.nav
-                    %li= link_to "Drafts", "/drafts"
+                    %li= link_to "Drafts", "#{@config["editor_root']}/drafts"
       - row do
         - span12 do
           = yield
